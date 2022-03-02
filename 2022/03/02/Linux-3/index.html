@@ -1,0 +1,950 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png">
+  <link rel="icon" href="https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#7a8183">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux入门的第三课，包含【组的介绍】、【权限】、【任务调度】、【磁盘分区】、【进程】、【服务管理】、【RPM】等内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-3">
+<meta property="og:url" content="http://example.com/2022/03/02/Linux-3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux入门的第三课，包含【组的介绍】、【权限】、【任务调度】、【磁盘分区】、【进程】、【服务管理】、【RPM】等内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg">
+<meta property="article:published_time" content="2022-03-02T03:49:47.779Z">
+<meta property="article:modified_time" content="2022-03-01T15:34:03.341Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg">
+  
+  
+  <title>Linux-3 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"https://www.baidu.com/","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-searc h.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lumos.</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux-3">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-02 11:49" pubdate>
+        2022年3月2日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      64 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux-3</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Linux组的介绍"><a href="#Linux组的介绍" class="headerlink" title="Linux组的介绍"></a>Linux组的介绍</h1><p>在linux中的每个用户必须属于一个组，不能独立于组外。在linux中每个文件有所有者、所在组、其它组的概念。<br>1.所有者<br>2.所在组<br>3.其它组<br>4.改变用户所在的组</p>
+<h3 id="组的创建"><a href="#组的创建" class="headerlink" title="组的创建"></a>组的创建</h3><p>基本指令：<code>groupadd 组名</code></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><pre><code class="hljs applescript">应用实例：<br>创建一个组monster，然后创建一个用户fox，并放入monster组中。<br>groupadd  monster<br>useradd -g monster fox<br><span class="hljs-built_in">id</span> fox<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件目录所有者"><a href="#文件目录所有者" class="headerlink" title="文件目录所有者"></a>文件目录所有者</h3><p>一般为文件的创建者，谁创建了该文件，谁就是文件的所有者。</p>
+<p>查看文件的所有者、所在组：<code>ls -ahl</code></p>
+<p>修改文件所有者：<code>chown 用户名 文件名</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">应用实例：使用root，创建一个文件apple.txt，然后将其所有者修改成tom<br><span class="hljs-built_in">chown</span> tom apple.txt<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件目录所在组"><a href="#文件目录所在组" class="headerlink" title="文件目录所在组"></a>文件目录所在组</h3><p>当用户创建了文件之后，文件所在的组就是该用户所在的组。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">应用实例：使用fox创建一个文件，看该文件属于哪个组<br><span class="hljs-built_in">pwd</span>（查看当前是否属于fox用户）<br><span class="hljs-built_in">touch</span> xxx（文件名）（创建一个文件）<br><span class="hljs-built_in">ls</span> -ahl（查看文件的所在组）<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改文件所在组"><a href="#修改文件所在组" class="headerlink" title="修改文件所在组"></a>修改文件所在组</h3><p><code>chgrp 组名 文件名</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">应用实例：root用户创建文件orange.txt，看该文件属于哪个组，然后将文件所在组修改到fruit组。<br>groupadd fruit<br><span class="hljs-built_in">touch</span> orange.txt<br><span class="hljs-built_in">chgrp</span> fruit orange.txt<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="其他组"><a href="#其他组" class="headerlink" title="其他组"></a>其他组</h3><p>出文件所有者和所在组的用户外，系统的其他用户都是文件的其他组。</p>
+<h3 id="改变用户所在组"><a href="#改变用户所在组" class="headerlink" title="改变用户所在组"></a>改变用户所在组</h3><p>在添加用户时，可以指定将该用户添加到哪个组中，同样的用root的管理权限也可以改变某个用户所在的组。</p>
+<ol>
+<li><p>usermod -g 新组名 用户名</p>
+</li>
+<li><p>usermod -d 目录名 用户名 （改变该用户登录的初始目录）</p>
+<p>说明：用户需要有进入到新目录的权限。</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">应用实例：<br>将zwj用户从原来所在组修改到wudang组。<br><span class="hljs-built_in">id</span> zwj <br><span class="hljs-built_in">cat</span> /etc/group | grep wudang<br>usermod -g wudang zwj<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h1><h3 id="权限基本介绍"><a href="#权限基本介绍" class="headerlink" title="权限基本介绍"></a>权限基本介绍</h3><p><img src="https://gitee.com/li-il/pics/raw/master/20220228184841.png" srcset="/img/loading.gif" lazyload alt="image-20220225201648459"></p>
+<p>文件及目录权限应用实例：</p>
+<p><code>ls -l</code> 中显示的内容如下：</p>
+<p><code>-rwxrw-r-- 1 root root 1213 Feb 2 09:39 abc</code></p>
+<p>第一个字符代表文件类型：<code>- l d c b</code></p>
+<p>其余三个字符每3个一组（rwx）：读（r）写（w）执行（x）</p>
+<ul>
+<li><p>第一组rwx：文件拥有者的权限是读、写和执行</p>
+</li>
+<li><p>第二组rw-：与文件拥有者同一组的用户的权限是读、写，但不能执行</p>
+</li>
+<li><p>第三组r–：不与文件拥有者同组的其他用户的权限是读，不能写和执行</p>
+</li>
+</ul>
+<p>可用数字表示为：<code>r=4 w=2 x=1</code>，因此rwx&#x3D;4+2+1&#x3D;7</p>
+<p>其他说明：</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184844.png" srcset="/img/loading.gif" lazyload alt="image-20220227132345761"></p>
+<h3 id="rwx权限详解"><a href="#rwx权限详解" class="headerlink" title="rwx权限详解"></a>rwx权限详解</h3><ul>
+<li><p>rwx作用到文件</p>
+<ol>
+<li><p>【r】代表可读：可以读取、查看。</p>
+</li>
+<li><p>【w】代表可写：可以修改，不能删除。</p>
+<p>（删除的前提是对该文件所在的目录有写权限）</p>
+</li>
+<li><p>【x】代表可执行：可以被执行。</p>
+</li>
+</ol>
+</li>
+<li><p>rwx作用到目录</p>
+<ol>
+<li>【r】代表可读：可以被读取，ls查看目录内容。</li>
+<li>【w】代表可写：可以修改，对目录内创建、删除、重命名目录。</li>
+<li>【x】代表可执行：可以进入该目录。</li>
+</ol>
+</li>
+</ul>
+<h3 id="修改权限"><a href="#修改权限" class="headerlink" title="修改权限"></a>修改权限</h3><p><code>chmod</code>可以修改文件或目录的权限。</p>
+<ul>
+<li><p>通过+、-、&#x3D;变更权限</p>
+<p>u：所有者     g：所在组    o：其他人    a：所有人（ugo的总和）</p>
+<p>例：<code>chmod u=rwx,g=rx,o=x 目录/目录名</code></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs vim">应用案例：<br><span class="hljs-number">1</span>. 给<span class="hljs-keyword">abc</span>文件的所有者读写执行的权限，给所在组读执行权限，给其他组读执行权限。<br>chmod <span class="hljs-keyword">u</span>=rwx,g=rx,<span class="hljs-keyword">o</span>=rx <span class="hljs-keyword">abc</span><br><span class="hljs-number">2</span>. 给<span class="hljs-keyword">abc</span>文件的所有者除去执行的权限，增加读写的权限<br>chmod <span class="hljs-keyword">u</span>-<span class="hljs-keyword">x</span>,g+<span class="hljs-keyword">w</span> <span class="hljs-keyword">abc</span><br><span class="hljs-number">3</span>. 给<span class="hljs-keyword">abc</span>文件的所有用户添加读的权限<br>chmod <span class="hljs-keyword">a</span>+r <span class="hljs-keyword">abc</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>通过数字变更权限</p>
+<p>r&#x3D;4    w&#x3D;2    x&#x3D;1    rwx&#x3D;4+2+1&#x3D;7</p>
+<p>例：<code>chmod u=rwx,g=rx,o=x 目录/目录名</code> &#x3D;&#x3D; <code>chmod 751 文件目录名</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">应用案例：<br><span class="hljs-number">1</span>. 将<span class="hljs-regexp">/home/</span>abc.txt文件的权限修改成rwxr-xr-x<br>chmod <span class="hljs-number">755</span> <span class="hljs-regexp">/home/</span>abc.txt<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="修改文件所有者"><a href="#修改文件所有者" class="headerlink" title="修改文件所有者"></a>修改文件所有者</h3><p><code>chown 新所有者 文件或目录</code>  改变所有者</p>
+<p><code>chown 新所有者:新组 文件或目录</code>  改变所有者和所在组</p>
+<p><code>-R</code> 如果是目录，则使其下所有的子文件或目录递归生效</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">应用案例：<br><span class="hljs-number">1</span>. 将 <span class="hljs-regexp">/home/</span>abc.txt 文件的所有者修改成 tom<br>chown tom <span class="hljs-regexp">/home/</span>abc.txt<br><span class="hljs-number">2</span>. 将 <span class="hljs-regexp">/home/</span>test 目录下所有的文件和目录的所有者都修改成tom<br>chown -R tom <span class="hljs-regexp">/home/</span>test<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改文件、目录所在组"><a href="#修改文件、目录所在组" class="headerlink" title="修改文件、目录所在组"></a>修改文件、目录所在组</h3><p><code>chgrp 新组 文件或目录</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">应用案例：<br><span class="hljs-number">1</span>. 将 <span class="hljs-regexp">/home/</span>abc.txt 文件的所在组改成 shaolin<br>gruopadd shaolin<br>chgrp shaolin <span class="hljs-regexp">/home/</span>abc.txt<br><span class="hljs-number">2</span>. 将 <span class="hljs-regexp">/home/</span>test 目录下的所有文件和目录 的所在组都改成shaolin<br>chgrp -R shaolin <span class="hljs-regexp">/home/</span>test<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="crond任务调度"><a href="#crond任务调度" class="headerlink" title="crond任务调度"></a>crond任务调度</h1><p>任务调度：是指系统在某个时间执行的特定的命令或程序</p>
+<p>任务调度分类：系统工作如病毒扫描等某些周而复始的工作，或个别用户工作如数据库的备份等。</p>
+<p><code>crontab</code>   进行定时任务的设置</p>
+<ul>
+<li><p>-e        编辑crontab定时任务</p>
+</li>
+<li><p>-l         查询crontab任务</p>
+</li>
+<li><p>-r         删除当前用户所有的crontab任务</p>
+</li>
+</ul>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>设置任务调度文件：<code>/etc/crontab</code></p>
+<p>设置个人任务调度，执行 <code>crontab -e</code> 命令</p>
+<p>输入任务到调度文件</p>
+<p><code>*/1 * * * * ls -l /etc/ &gt;/tmp/to.txt</code></p>
+<p>意思是每小时的每分钟执行<code>ls -l /etc/ &gt;/tmp/to.txt</code>命令</p>
+<h3 id="占位符及特殊符号的说明"><a href="#占位符及特殊符号的说明" class="headerlink" title="占位符及特殊符号的说明"></a>占位符及特殊符号的说明</h3><p><img src="https://gitee.com/li-il/pics/raw/master/20220228184851.png" srcset="/img/loading.gif" lazyload alt="image-20220225203025679"></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184853.png" srcset="/img/loading.gif" lazyload alt="image-20220225203039641"></p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><p><code>cronrtab -r</code>：终止任务调度</p>
+<p><code>cronrtab -l</code>：列出当前有哪些任务调度</p>
+<p><code>service crond restart</code>：重启任务调度</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184855.png" srcset="/img/loading.gif" lazyload alt="image-20220225203103951"></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk">应用案例：<br><span class="hljs-number">1</span>. 每隔<span class="hljs-number">1</span>分钟，就将当前的日期信息追加到<span class="hljs-regexp">/tmp/my</span>date文件中<br>*<span class="hljs-regexp">/1 * * * * date &gt;&gt; /</span>tmp/mydate<br><span class="hljs-number">2</span>. 每隔<span class="hljs-number">1</span>分钟，将当前日期和日历都追加到<span class="hljs-regexp">/home/my</span>cal文件中<br>vim <span class="hljs-regexp">/home/my</span>.sh <br>date &gt;&gt; <span class="hljs-regexp">/home/my</span>cal 和 cal &gt;&gt; <span class="hljs-regexp">/home/my</span>cal（写入内容）<br>chmod u+x <span class="hljs-regexp">/home/my</span>.sh （给my.sh增加执行权限）<br>crontab -e <br>*<span class="hljs-regexp">/1 * * * * /</span>home/my.sh<br><span class="hljs-number">3</span>. 每天凌晨两点将mysql数据库testdb备份到文件中<br>crontab -e<br><span class="hljs-number">0</span> <span class="hljs-number">2</span> * * * mysqldump -uroot -proot testdb &gt;&gt; <span class="hljs-regexp">/home/</span>db.bak<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>说明：</p>
+<p>可以通过写一个脚本，直接执行脚本</p>
+<p><code>vim my.sh</code></p>
+<p>打开文件之后写入：</p>
+<p><code>date &gt;&gt; /home/mycal</code></p>
+<p><code>cal &gt;&gt; /home/mycal</code></p>
+<p>更改权限：</p>
+<p><code>chmod u+x my.sh</code></p>
+<p>执行脚本：<code>./my.sh</code></p>
+</blockquote>
+<h3 id="at定时任务"><a href="#at定时任务" class="headerlink" title="at定时任务"></a>at定时任务</h3><ol>
+<li><p>at是<u>一次性</u>定时计划任务。</p>
+</li>
+<li><p>at的守护进程atd会以后台模式运行，检查作业队列运行。</p>
+</li>
+<li><p>默认情况下，atd守护进程每60秒检查作业队列，有作业时，会检查作业运行时间，如果时间与当前时间匹配，则运行此作业。</p>
+</li>
+<li><p>在使用at命令的时候，一定要保证atd进程的启动</p>
+</li>
+<li><p>查看atd进程是否启动：<code>ps -ef | grep atd</code></p>
+</li>
+<li><p>at 命令格式：</p>
+<p><code>at [选项] [时间]</code></p>
+<p><code>ctrl+D</code> 结束at命令的输入</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184858.png" srcset="/img/loading.gif" lazyload alt="image-20220225203643172"></p>
+<h1 id="磁盘分区机制"><a href="#磁盘分区机制" class="headerlink" title="磁盘分区机制"></a>磁盘分区机制</h1><p>原理：</p>
+<ol>
+<li><p>Linux只有一个根目录，一个独立且唯一的文件结构，每个分区都是用来组成整个文件系统的一部分。</p>
+</li>
+<li><p>Linux采用了一种叫“载入”的处理方法，它将一个分区和一个目录联系起来。</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184900.png" srcset="/img/loading.gif" lazyload alt="image-20220225204003514"></p>
+<h3 id="Linux分区"><a href="#Linux分区" class="headerlink" title="Linux分区"></a>Linux分区</h3><p>查看所有设备挂载情况：<code>lsblk</code> 或者 <code>lsblk -f</code></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184902.png" srcset="/img/loading.gif" lazyload alt="image-20220225204057400"></p>
+<h3 id="硬盘说明"><a href="#硬盘说明" class="headerlink" title="硬盘说明"></a>硬盘说明</h3><p><img src="https://gitee.com/li-il/pics/raw/master/20220228184919.png" srcset="/img/loading.gif" lazyload alt="image-20220225204131928"></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184923.png" srcset="/img/loading.gif" lazyload alt="image-20220225204214815"></p>
+<h3 id="增加磁盘案例"><a href="#增加磁盘案例" class="headerlink" title="增加磁盘案例"></a>增加磁盘案例</h3><p>（P59）此处没有进行实操。</p>
+<ol>
+<li>虚拟机添加硬盘</li>
+<li>分区</li>
+<li>格式化</li>
+<li>挂载</li>
+<li>设置可以自动挂载</li>
+</ol>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184926.png" srcset="/img/loading.gif" lazyload alt="image-20220225204947122"></p>
+<h3 id="查询系统整体磁盘使用情况"><a href="#查询系统整体磁盘使用情况" class="headerlink" title="查询系统整体磁盘使用情况"></a>查询系统整体磁盘使用情况</h3><p><strong>整体磁盘查询</strong></p>
+<p><code>df -h</code></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184929.png" srcset="/img/loading.gif" lazyload alt="image-20220225205228173"></p>
+<hr>
+<p><strong>特定磁盘查询</strong></p>
+<p><code>du -h 目录</code>  查询指定目录的磁盘占用情况，默认为当前目录</p>
+<p>-s                         指定目录占用大小汇总</p>
+<p>-h                         带计量单位</p>
+<p>-a                         含文件</p>
+<p>-c                         列出明细的同时，增加汇总值</p>
+<p>–max-depth&#x3D;1    子目录深度</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-number">1</span>. 查询 /<span class="hljs-keyword">opt</span> 目录的磁盘占用情况，深度为<span class="hljs-number">1</span>：<br>du -h --<span class="hljs-built_in">max</span>-depth=<span class="hljs-number">1</span> /<span class="hljs-keyword">opt</span><br><br><span class="hljs-number">2</span>. 包含文件夹：<br>du -<span class="hljs-keyword">ha</span> --<span class="hljs-built_in">max</span>-depth=<span class="hljs-number">1</span> /<span class="hljs-keyword">opt</span><br><br><span class="hljs-number">3</span>. 列出明细，增加汇总值：<br>du -hac --<span class="hljs-built_in">max</span>-depth=<span class="hljs-number">1</span> /<span class="hljs-keyword">opt</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>磁盘情况指令</strong></p>
+<ol>
+<li><p>统计 &#x2F;opt 文件夹下文件的个数</p>
+<p><code>ls</code></p>
+<p><code>ls -l /opt</code></p>
+<p><code>ls -l /opt | grep &quot;^-&quot;</code></p>
+<p><code>ls -l /opt | grep &quot;^-&quot; | wc -l</code></p>
+</li>
+<li><p>统计 &#x2F;opt 文件夹下目录的个数</p>
+<p><code>ls -l /opt | grep &quot;^d&quot; | wc -l</code></p>
+</li>
+<li><p>统计 &#x2F;opt 文件夹下文件的个数，包括子文件夹里的</p>
+<p><code>ls -lR /opt | grep &quot;^-&quot; | wc -l</code></p>
+</li>
+<li><p>统计 &#x2F;opt 文件夹下目录的个数，包括子文件夹里的</p>
+<p><code>ls -lR /opt | grep &quot;^d&quot; | wc -l</code></p>
+</li>
+<li><p>以树状显示目录结构</p>
+<p><code>tree 目录</code></p>
+</li>
+</ol>
+<h1 id="进程基本介绍"><a href="#进程基本介绍" class="headerlink" title="进程基本介绍"></a>进程基本介绍</h1><ol>
+<li><p>在Linux中，每一个执行的程序都称为一个<u>进程</u>，每一个进程都分配一个ID号（pid，进程号）</p>
+</li>
+<li><p>每个进程都是以两种方式存在的，<u>前台与后台</u>。</p>
+<p>前台：用户目前屏幕上可以操作的</p>
+<p>后台：实际在操作，但是屏幕上无法看到，通常以后台方式进行</p>
+</li>
+<li><p>一般系统的服务都是以后台进程的方式存在，都会常驻在系统中，直到关机才结束</p>
+</li>
+</ol>
+<h3 id="显示系统执行的进程"><a href="#显示系统执行的进程" class="headerlink" title="显示系统执行的进程"></a>显示系统执行的进程</h3><p>ps指令是用来查看目前系统中，有哪些正在执行，以及他们执行的状况，可以不加任何参数</p>
+<p>ps显示的信息选项：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PID</td>
+<td>进程识别号</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>终端机号</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>此进程所消耗的CPU时间</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>正在执行的命令或进程名</td>
+</tr>
+</tbody></table>
+<p><code>ps -a</code> 显示当前终端的所有进程信息</p>
+<p><code>ps -u</code> 以用户的格式显示进程信息</p>
+<p><code>ps -x</code> 显示后台进程运行的参数</p>
+<h3 id="ps详解"><a href="#ps详解" class="headerlink" title="ps详解"></a>ps详解</h3><h4 id="进程详解信息"><a href="#进程详解信息" class="headerlink" title="进程详解信息"></a>进程详解信息</h4><p>可以使用 <code>ps -aux | more</code>查看进程详细信息</p>
+<p>也可以使用grep进行过滤 <code>ps -aux | grep xxx</code></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184941.png" srcset="/img/loading.gif" lazyload alt="image-20220226123736480"></p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184944.png" srcset="/img/loading.gif" lazyload alt="image-20220226123617462"></p>
+<h4 id="全格式详解所有进程"><a href="#全格式详解所有进程" class="headerlink" title="全格式详解所有进程"></a>全格式详解所有进程</h4><p><img src="https://gitee.com/li-il/pics/raw/master/20220228184948.png" srcset="/img/loading.gif" lazyload alt="image-20220226123844202"></p>
+<p>以全格式显示当前的所有进程：<code>ps -ef | grep xxx</code></p>
+<h3 id="终止进程"><a href="#终止进程" class="headerlink" title="终止进程"></a>终止进程</h3><p>某个进程执行到一半需要停止时，或是已经消耗了很大的系统资源时，可以考虑关掉该进程</p>
+<p><code>kill [选项] 进程号</code> ：通过进程号杀死进程</p>
+<p><code>killall 进程名称</code> ：通过进程名称杀死进程，也支持通配符<br><code>-9</code> 表示强迫进程立即停止</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184950.png" srcset="/img/loading.gif" lazyload alt="image-20220226124209244"></p>
+<p>案例一：需要踢掉某个非法登录用户</p>
+<img src="https://gitee.com/li-il/pics/raw/master/20220228184953.png" srcset="/img/loading.gif" lazyload alt="image-20220226124523588" style="zoom:200%;" />
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">1. 踢掉某个非法登录用户<br><span class="hljs-built_in">kill</span> 进程号，比如<span class="hljs-built_in">kill</span> 11421<br>说明：因为priv是先导进程，所以杀掉父进程，子进程也会被杀掉<br>2. 终止远程登陆服务sshd，在适当的时候再次重启sshd服务<br><span class="hljs-built_in">kill</span> sshd对应的进程号<br>/bin/systemctl start sshd.service<br>3. 终止多个gedit<br>killall gedit<br>4. 强制杀掉一个终端<br><span class="hljs-built_in">kill</span> -9 bash对应的进程号<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="pstree指令"><a href="#pstree指令" class="headerlink" title="pstree指令"></a>pstree指令</h3><p>pstree [选项]：更加直观的查看进程信息</p>
+<p>-p          显示进程的PID</p>
+<p>-u          显示进程的所属用户</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs markdown">应用实例：<br><span class="hljs-bullet">1.</span> 以树状的形式显示进程的pid<br>pstree -p<br><span class="hljs-bullet">2.</span> 以树状的形式显示进程的用户<br>pstree -u<br><span class="hljs-bullet">3.</span> 额外小知识 在root用户下，查看所有的用户和密码<br>cat /etc/passwd<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="服务管理"><a href="#服务管理" class="headerlink" title="服务管理"></a>服务管理</h1><ul>
+<li>介绍</li>
+</ul>
+<p>服务：本质就是进程，但是运行在后台，通常会监听某个端口，等待其他程序的请求，比如mysqld，sshd，防火墙等，又称为守护进程。</p>
+<ul>
+<li>service 管理指令</li>
+</ul>
+<ol>
+<li><p>service 服务名【start、stop、restart、reload、status】</p>
+</li>
+<li><p>在centOS7.0后服务大多数使用<code>systemctl</code></p>
+</li>
+<li><p>service指令管理的服务在<code>/etc/init.d</code>查看</p>
+<p><code>ls -l /etc/init.d</code></p>
+</li>
+<li><p>需要使用service指令，查看，关闭，启动network</p>
+<p>（需要在虚拟系统演示，因为网络连接会关闭）</p>
+</li>
+<li><p>原理解释：在系统中，mysql客户端会去找Linux的端口号（3306），然后开启对应的后台进程</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228184959.png" srcset="/img/loading.gif" lazyload alt="image-20220226125639370"></p>
+<h3 id="查看服务名"><a href="#查看服务名" class="headerlink" title="查看服务名"></a>查看服务名</h3><ul>
+<li>使用<code>setup</code> 就可以看到所有的系统服务</li>
+<li><code>ls -l /etc/init.d</code> 查看service指令管理的服务</li>
+</ul>
+<h3 id="服务的运行级别"><a href="#服务的运行级别" class="headerlink" title="服务的运行级别"></a>服务的运行级别</h3><p><img src="https://gitee.com/li-il/pics/raw/master/20220228185001.png" srcset="/img/loading.gif" lazyload alt="image-20220226125949280"></p>
+<h3 id="服务管理-1"><a href="#服务管理-1" class="headerlink" title="服务管理"></a>服务管理</h3><ul>
+<li><p>介绍</p>
+<p>chkconfig指令可以给服务的各个运行级别设置自启动或自关闭</p>
+<p>chkconfig指令管理的服务在&#x2F;etc&#x2F;init.d上查看</p>
+</li>
+<li><p>基本语法</p>
+<p> <code>chkconfig --list</code> </p>
+<p><code>chkconfig --list | grep xxx</code></p>
+<p><code>chkconfig --level 5 服务名 on/off</code></p>
+</li>
+<li><p>应用实例</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">对network服务进行各种操作，把network在<span class="hljs-number">3</span>运行级别关闭自启动<br>chkconfig <span class="hljs-comment">--level 3 network off</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>chkconfig重新设置服务自启动或者关闭，需要重启reboot生效</p>
+</li>
+</ul>
+<h3 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h3><ul>
+<li><p>systemctl管理指令</p>
+<p><code>systemctl 【start、stop、restart、status】 服务名</code></p>
+<p>systemctl指令管理的服务可以在&#x2F;usr&#x2F;lib&#x2F;systemd&#x2F;system查看</p>
+</li>
+<li><p>systemctl设置服务的自启动状态</p>
+<p><code>systemctl list-unit-files [| grep 服务名]</code> 查看服务开机启动状态</p>
+<p><code>systemctl enable 服务名</code> 设置服务开机启动</p>
+<p><code>systemctl disable 服务名</code> 关闭服务开机启动</p>
+<p><code>systemctl is-enabled 服务名</code> 查询某个服务是否是自启动的</p>
+</li>
+<li><p>应用案例</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig">查看当前防火墙的状况，关闭和重启防火墙<br><span class="hljs-string">systemctl</span> <span class="hljs-string">status</span> <span class="hljs-string">firewalld</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">stop</span> <span class="hljs-string">firewalld</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">start</span> <span class="hljs-string">firewalld</span><br>上课演示，查看服务<br><span class="hljs-string">ls</span> -<span class="hljs-string">l</span> /<span class="hljs-string">usr</span>/<span class="hljs-string">lib</span>/<span class="hljs-string">systemd</span>/<span class="hljs-string">system</span> | <span class="hljs-string">grep</span> <span class="hljs-string">fire</span><br><span class="hljs-string">systemctl</span> <span class="hljs-built_in">list-unit-files</span> | <span class="hljs-string">grep</span> <span class="hljs-string">firewalld</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">is-enabled</span> <span class="hljs-string">firewalld</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">is-enabled</span> <span class="hljs-string">sshd</span>.<span class="hljs-string">service</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>细节讨论</p>
+<p>关闭或重启防火墙后，立即生效。（telent 测试某个端口即可）。</p>
+<p>这种方式是临时生效，重启系统后，回归以前对服务的设置。</p>
+<p>如果希望某服务启动或关闭永久生效，就使用<code>systemctl [enabled/disabled] 服务名</code>。</p>
+</li>
+</ul>
+<h3 id="打开或关闭指定端口"><a href="#打开或关闭指定端口" class="headerlink" title="打开或关闭指定端口"></a>打开或关闭指定端口</h3><ul>
+<li>firewall指令</li>
+</ul>
+<p>​    <code>firewall-cmd --permanent --add-port=端口号/协议</code>     打开端口</p>
+<p>​    <code>    firewall-cmd --permanent --remove-port=端口号/协议</code>    关闭端口</p>
+<p>​    <code>    firewall-cmd --reload</code>    重新载入，才能生效</p>
+<p>​    <code>   firewall-cmd --permanent --query-port=端口号/协议   </code>查询端口是否开放</p>
+<ul>
+<li><p>应用案例</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>. 启用防火墙，测试<span class="hljs-number">111</span>端口是否能telent<br><span class="hljs-attribute">netstat</span> -anp | more 查看对应的协议<br><span class="hljs-attribute">telnet</span> <span class="hljs-number">192.168.200.130</span> <span class="hljs-number">111</span><br><span class="hljs-attribute">2</span>. 开放<span class="hljs-number">111</span>端口<br><span class="hljs-attribute">firewall</span>-cmd --permanent --add-port=<span class="hljs-number">111</span>/tcp<br><span class="hljs-attribute">firewall</span>-cmd --reload<br><span class="hljs-attribute">firewall</span>-cmd --permanent --query-port=<span class="hljs-number">111</span>/tcp<br><span class="hljs-attribute">3</span>. 关闭<span class="hljs-number">111</span>端口<br><span class="hljs-attribute">firewall</span>-cmd --permanent --remove-port=<span class="hljs-number">111</span>/tcp<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="动态监控进程"><a href="#动态监控进程" class="headerlink" title="动态监控进程"></a>动态监控进程</h3><p>top与ps命令很相似，都是用来显示正在执行的进程，但是top在执行一段时间后，可以更新正在运行的进程。</p>
+<p><code>top【选项】</code></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d 秒数</td>
+<td>指定top命令每隔几秒更新，默认是3秒</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>使top不显示任何限制或僵死进程</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定监控进程ID来仅仅监视某个进程的状态</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185007.png" srcset="/img/loading.gif" lazyload alt="image-20220226143535876"></p>
+<p>三个值加起来除以三，如果在0.7以上，就需要注意了，说明系统负载比较大</p>
+<p>在终端输入top，然后观察进程（P78）</p>
+</blockquote>
+<h3 id="动态监控"><a href="#动态监控" class="headerlink" title="动态监控"></a>动态监控</h3><p><strong>交互操作说明</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P</td>
+<td>以CPU使用率排序，默认就是此项</td>
+</tr>
+<tr>
+<td>M</td>
+<td>以内存的使用率排序</td>
+</tr>
+<tr>
+<td>N</td>
+<td>以PID排序</td>
+</tr>
+<tr>
+<td>q</td>
+<td>退出top</td>
+</tr>
+</tbody></table>
+<p><strong>应用案例</strong></p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs coq"><span class="hljs-number">1.</span> 监视特定用户，例如tom<br><span class="hljs-built_in">top</span>：输入此命令，然后回车，查看执行的进程<br>u：然后输入u，回车，在输入用户名，即可<br><span class="hljs-number">2.</span> 终止指定的进程，例如结束tom登录<br><span class="hljs-built_in">top</span><br>k<br>输入要结束的进程ID号<br><span class="hljs-number">9</span> （输入信号量，强制关闭）<br><span class="hljs-number">3.</span> 指定系统状态更新的时间（每隔<span class="hljs-number">10</span>秒自动更新），默认是<span class="hljs-number">3</span>秒<br><span class="hljs-built_in">top</span> -d <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="查看系统网络情况netstat"><a href="#查看系统网络情况netstat" class="headerlink" title="查看系统网络情况netstat"></a>查看系统网络情况netstat</h3><p><code>netstat [选项]</code></p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-an</td>
+<td>按一定顺序排序输出</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示哪个进程正在调用</td>
+</tr>
+</tbody></table>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">应用案例<br>查看服务名为sshd的服务的信息<br>netstat -anp <span class="hljs-string">| grep sshd</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="检测主机连接命令ping"><a href="#检测主机连接命令ping" class="headerlink" title="检测主机连接命令ping"></a>检测主机连接命令ping</h3><p>是一种网络检测工具，主要是用于检测远程主机是否正常，或者是两部主机间的网线或网卡故障。</p>
+<p><code>ping 对方ip地址</code></p>
+<blockquote>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185011.png" srcset="/img/loading.gif" lazyload alt="image-20220226144452971"></p>
+<p>ESTABLISHED：已经成功建立连接的</p>
+<p>LISTEN：正在等待建立连接的</p>
+<p>如果是tom用户logout，那么不会立刻断开，而是会有一个timewait的过程</p>
+</blockquote>
+<h1 id="RPM管理"><a href="#RPM管理" class="headerlink" title="RPM管理"></a>RPM管理</h1><p>查看已安装的rpm列表 <code>rpm -qa | grep xxx</code></p>
+<p>举例：查看当前系统是否安装了firefox</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185014.png" srcset="/img/loading.gif" lazyload alt="image-20220227154138600"></p>
+<h3 id="rpm包的其他查询指令"><a href="#rpm包的其他查询指令" class="headerlink" title="rpm包的其他查询指令"></a>rpm包的其他查询指令</h3><p><code>rpm -qa</code>    查询所安装的所有rpm软件包</p>
+<p><code>rpm -qa | more    </code></p>
+<p><code>rpm -qa | grep xxx    </code></p>
+<p><code>rpm -q 软件包名</code>    查询软件包是否安装</p>
+<p><code>rpm -qi 软件包名</code>    查询软件包信息</p>
+<p><code>rpm -ql 软件包名</code>    查询软件包中的文件</p>
+<p><code>rpm -qf 文件全路径名    </code>    查询文件所属的软件包</p>
+<p><code>rpm -qf /etc/passwd</code>    </p>
+<p><code>rpm -qf /root/install.log</code>    </p>
+<p>（例如：软件包名&#x3D;firefox）</p>
+<h3 id="卸载rpm包"><a href="#卸载rpm包" class="headerlink" title="卸载rpm包"></a>卸载rpm包</h3><p><code>rpm -e RPM包名 //erase</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">应用案例<br>删除firefox 软件包<br>rpm -e firefox<br></code></pre></td></tr></table></figure>
+
+<p><strong>细节讨论</strong></p>
+<p>如果其他软件包依赖于要卸载的软件包，则卸载时会出现错误信息。</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185018.png" srcset="/img/loading.gif" lazyload alt="image-20220227155157344"></p>
+<p>如果要删除foo，可以使用<code>$rpm -e --nodeps foo</code>强制删除，但是一般不推荐，因为依赖于该软件包的程序可能无法运行</p>
+<h3 id="安装rpm包"><a href="#安装rpm包" class="headerlink" title="安装rpm包"></a>安装rpm包</h3><p><code>rpm -ivh RPM包全路径名称</code></p>
+<blockquote>
+<p>i&#x3D;install    安装</p>
+<p>v&#x3D;verbose    提示</p>
+<p>h&#x3D;hash    进度条</p>
+</blockquote>
+<blockquote>
+<p><strong>应用实例</strong><br>卸载和安装firefox</p>
+<p>打开桌面上的驱动，然后进入Packages文件夹</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185021.png" srcset="/img/loading.gif" lazyload alt="image-20220226145128664"></p>
+<p>可以搜索，然后将要安装的软件（如firefox）粘贴到某个文件夹下（如&#x2F;opt）</p>
+<p><img src="https://gitee.com/li-il/pics/raw/master/20220228185024.png" srcset="/img/loading.gif" lazyload alt="image-20220226145149161"></p>
+</blockquote>
+<h3 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h3><p><strong>介绍</strong></p>
+<p>yum是一个shell前端软件包管理器，基于rpm包管理，能够从指定的服务器自动下载rpm包并安装，可以自动处理依赖性关系，并且一次性安装所有以来的软件包</p>
+<p><strong>yum的基本指令</strong></p>
+<p><code>yum list | grep xx软件列表</code>    查询yum服务器是否有需要安装的软件</p>
+<p><code>yum install xxx    </code>    安装指定的yum包</p>
+<p><strong>应用实例</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs 1c">使用yum的方式来安装firefox<br>rpm -r firefox<br>yum list <span class="hljs-string">| grep firefox</span><br>yum install firefox<br></code></pre></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/02/Linux-2/">
+                        <span class="hidden-mobile">Linux-2</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://www.baidu.com/";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
