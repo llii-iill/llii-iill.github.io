@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png">
+  <link rel="icon" href="https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#7a8183">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux入门的第四课，包含【shell编程】等内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-4">
+<meta property="og:url" content="http://example.com/2022/03/02/Linux-4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux入门的第四课，包含【shell编程】等内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg">
+<meta property="article:published_time" content="2022-03-02T03:52:37.134Z">
+<meta property="article:modified_time" content="2022-03-01T15:30:20.710Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg">
+  
+  
+  <title>Linux-4 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"https://www.baidu.com/","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-searc h.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Lumos.</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Linux-4">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-02 11:52" pubdate>
+        2022年3月2日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      45 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Linux-4</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Shell编程"><a href="#Shell编程" class="headerlink" title="Shell编程"></a>Shell编程</h1><p><strong>介绍</strong></p>
+<p>shell是命令行解释器，为用户提供了一个向Linux内核发送请求来运行程序的界面系统和程序</p>
+<p><strong>脚本格式要求</strong></p>
+<p>以<code>#!/bin/bash</code>开头</p>
+<p>脚本需要有可执行权限</p>
+<p><strong>编写第一个shell脚本</strong></p>
+<figure class="highlight d"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><pre><code class="hljs d">创建一个shell脚本，输出hello world<br>vim hello.sh<br><span class="hljs-meta">#!/bin/bash</span><br>echo <span class="hljs-string">&quot;hello world&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>脚本常用的执行方式</strong></p>
+<ol>
+<li><p>输入脚本的绝对路径或相对路径</p>
+<p>首先要赋予hello.sh脚本的+x权限，再执行脚本</p>
+</li>
+<li><p>sh+脚本</p>
+<p>可以不用赋予脚本+x权限，直接执行即可</p>
+<p>例如：sh hello.sh（也可使用绝对路径）</p>
+</li>
+</ol>
+<blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /root/shcode<br><span class="hljs-built_in">cd</span> /root/shcode/<br><span class="hljs-built_in">ls</span><br>vim hello.sh<br>【文件中】<br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello,world~&quot;</span><br>【退出文件】<br></code></pre></td></tr></table></figure>
+
+<p><img src="D:\typora\AllImages\20220228185028.png" srcset="/img/loading.gif" lazyload alt="image-20220227160802938"></p>
+<p><img src="D:\typora\AllImages\20220228185030.png" srcset="/img/loading.gif" lazyload alt="image-20220226151427317"></p>
+</blockquote>
+<h2 id="shell的变量"><a href="#shell的变量" class="headerlink" title="shell的变量"></a>shell的变量</h2><p><strong>介绍</strong></p>
+<p>shell变量分为系统变量和用户自定义变量</p>
+<p>系统变量：$HOME，$PWD等</p>
+<p>显示当前shell中所有变量：<code>set</code></p>
+<p><strong>shell变量的定义</strong></p>
+<p>定义变量 ： <code>变量=值</code></p>
+<p>撤销变量 ： <code>unset 变量</code></p>
+<p>声明静态变量 ：<code>readonly 变量</code>（注意：不能unset）</p>
+<p><strong>应用实例</strong></p>
+<blockquote>
+<p>创建文件</p>
+<p><code>vim var.sh</code></p>
+<p>执行脚本</p>
+<p><code>./var.sh</code></p>
+<p><img src="D:\typora\AllImages\20220228185033.png" srcset="/img/loading.gif" lazyload alt="image-20220226151637198"></p>
+</blockquote>
+<p><strong>shell变量的定义规则</strong></p>
+<p>变量名称可以由字母、数字和下划线组成，但是不能以数字开头</p>
+<p>等号两侧不能有空格</p>
+<p>变量名称一般习惯为大写</p>
+<p><strong>将命令的返回值赋给变量</strong></p>
+<p>A&#x3D;`date` 反引号，运行里面的命令，把结果返回给变量Ａ</p>
+<p>A&#x3D;$(date) 等价上面的写法 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">C=`<span class="hljs-built_in">date</span>`<br>D=$(<span class="hljs-built_in">date</span>)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;C=<span class="hljs-variable">$C</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;D=<span class="hljs-variable">$D</span>&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h3><p><strong>基本语法</strong></p>
+<p>将shell变量输出为环境变量（全局变量）</p>
+<p>让修改后的配置信息立刻生效</p>
+<p>查询环境变量的值</p>
+<p><strong>应用案例</strong></p>
+<p>在&#x2F;etc&#x2F;profile文件中定义TOMCAT_HOME环境变量</p>
+<p>查看环境变量TOMCAT_HOME的值</p>
+<p>在另一个shell程序中使用TOMCAT_HOME</p>
+<blockquote>
+<p>注意：在输出TOMCAT_HOME之前，需要让其生效</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/opt/</span><br>vim <span class="hljs-regexp">/etc/</span>profile<br></code></pre></td></tr></table></figure>
+
+<p><img src="D:\typora\AllImages\20220228185039.png" srcset="/img/loading.gif" lazyload alt="image-20220226212829099"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$TOMCAT_HOME</span><br><span class="hljs-built_in">source</span> /etc/profile<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$TOMCAT_HOME</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="D:\typora\AllImages\20220228185043.png" srcset="/img/loading.gif" lazyload alt="image-20220226212908467"></p>
+</blockquote>
+<p><strong>shell的多行注释</strong>：</p>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">:&lt;&lt;!<br>……<br>!<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="位置参数变量"><a href="#位置参数变量" class="headerlink" title="位置参数变量"></a>位置参数变量</h3><p><strong>介绍</strong></p>
+<p>当我们执行shell脚本时，如果希望获取到命令行的参数信息，就要使用位置参数变量</p>
+<p>例如：<code>./myshell.sh 100 200</code>， 就是一个执行shell的命令行，可以在myshell脚本中获取到参数信息</p>
+<p><strong>基本语法</strong></p>
+<p><img src="D:\typora\AllImages\20220228185047.png" srcset="/img/loading.gif" lazyload alt="image-20220227162629961"></p>
+<p><strong>位置参数变量</strong></p>
+<p>编写一个shell脚本position.sh，在脚本中获取到命令行的各个参数信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim position.sh<br>【文件中】<br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;0=<span class="hljs-variable">$0</span> 1=<span class="hljs-variable">$1</span> 2=<span class="hljs-variable">$2</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;所有的参数=$*&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;参数的个数=<span class="hljs-variable">$#</span>&quot;</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x position.sh<br>./position.sh 100 200<br></code></pre></td></tr></table></figure>
+
+<h3 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h3><p><strong>介绍</strong></p>
+<p>预定义变量就是shell设计者定义好的变量，可以直接在shell脚本中调用</p>
+<p><strong>基本语法</strong></p>
+<p><code>$$</code>    当前进程的进程号（PID）</p>
+<p><code>$!</code>    后台运行的最后一个进程的进程号（PID）</p>
+<p><code>$?</code>    最后一次执行的命令的返回状态，如果这个变量的值为0，则上一个命令正确执行；如果非0，则执行不正确。</p>
+<p><strong>应用实例</strong></p>
+<p>在shell脚本中简单实用预定义变量</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">vim</span> perVar.<span class="hljs-keyword">sh</span><br>【文件中】<br>#!/bin/bash<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;当前执行的进程id=$$&quot;</span><br># 以后台的方式运行一个脚本，并获取他的进程号<br>/root/shcode/position.<span class="hljs-keyword">sh</span> &amp;<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;最后一个后台方式运行的进程id=$!&quot;</span><br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;执行的结果是$?&quot;</span><br>【退出文件】<br>chmod <span class="hljs-keyword">u</span>+<span class="hljs-keyword">x</span> perVar.<span class="hljs-keyword">sh</span><br>./ preVar.<span class="hljs-keyword">sh</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="shell运算符"><a href="#shell运算符" class="headerlink" title="shell运算符"></a>shell运算符</h2><p><strong>基本语法</strong></p>
+<ol>
+<li><p><code>$((运算式))</code>   或   <code>$[运算式]</code>   或者  <code>expr m + n</code> </p>
+</li>
+<li><p>expr运算符之间<u>要有空格</u>，如果希望将expr的值赋给某个变量，使用&#96;&#96;</p>
+<p>如果没有空格，会被当成一个整体</p>
+</li>
+<li><p><code>expr m - n</code> </p>
+</li>
+<li><p><u>\*</u>  &#x2F;  % 乘、除、取余</p>
+</li>
+</ol>
+<p><strong>应用实例</strong></p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs subunit">计算（2<span class="hljs-string">+3</span>）×4的值<br>请求出命令行的两个参数的和<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim oper.sh<br>【文件中】<br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-comment"># 案例一</span><br>RES1=$(((<span class="hljs-number">2</span>+<span class="hljs-number">3</span>)*<span class="hljs-number">4</span>))<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;res1=<span class="hljs-variable">$RES1</span>&quot;</span><br><br>RES2=$[(2+3)*4]<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;res2=<span class="hljs-variable">$RES2</span>&quot;</span><br><br>TEMP=`<span class="hljs-built_in">expr</span> 2 + 3`<br>RES3=`<span class="hljs-built_in">expr</span> <span class="hljs-variable">$TEMP</span> \* 4`<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;res3=<span class="hljs-variable">$RES3</span>&quot;</span><br><br><span class="hljs-comment"># 案例二</span><br>SUM=[<span class="hljs-variable">$1</span>+<span class="hljs-variable">$2</span>]<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;sum=<span class="hljs-variable">$SUM</span>&quot;</span><br><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x oper.sh<br>./oper.sh<br></code></pre></td></tr></table></figure>
+
+<h2 id="循环和判断"><a href="#循环和判断" class="headerlink" title="循环和判断"></a>循环和判断</h2><h3 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h3><p><strong>基本语法</strong></p>
+<p><code>[ condition ]</code> </p>
+<p>注意condition前后都有空格</p>
+<p>非空返回true，可使用$?验证（0为true，大于1为false）</p>
+<p><strong>常见判断</strong></p>
+<ol>
+<li><p>字符串比较 <code>=</code> </p>
+</li>
+<li><p>两个整数的比较</p>
+<table>
+<thead>
+<tr>
+<th>-lt</th>
+<th>小于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-le</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>-eq</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>-ne</td>
+<td>不等于</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>按照文件的权限进行判断</p>
+<table>
+<thead>
+<tr>
+<th>-r</th>
+<th>有读的权限</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-w</td>
+<td>有写的权限</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>有执行的权限</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>按照文件类型进行判断</p>
+<table>
+<thead>
+<tr>
+<th>-f</th>
+<th>文件存在并且是一个常规的文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-e</td>
+<td>文件存在</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>文件存在并且是一个目录</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p><strong>应用实例</strong></p>
+<blockquote>
+<p><code>vim ifdemo.sh</code></p>
+<p>【文件中】</p>
+<p><img src="D:\typora\AllImages\20220228185053.png" srcset="/img/loading.gif" lazyload alt="image-20220226214023550"></p>
+<p>【退出文件】</p>
+<p><code>chmod u+x ifdemo.sh</code></p>
+<p><code>./ifdemo.sh</code></p>
+</blockquote>
+<h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><p><strong>应用案例</strong></p>
+<p>编写一个shell程序，如果输入的参数大于等于60则输出“及格了”，否则输出“不及格”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim ifCase.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$1</span> -ge 60 ]<br><span class="hljs-keyword">then</span> <br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;及格了&quot;</span><br><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$1</span> -lt 60 ]<br><span class="hljs-keyword">then</span> <br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;不及格&quot;</span><br><span class="hljs-keyword">fi</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x ifCase.sh<br>./ifCase.sh 70<br></code></pre></td></tr></table></figure>
+
+<h4 id="case"><a href="#case" class="headerlink" title="case"></a>case</h4><p><strong>应用案例</strong></p>
+<p>当命令行参数是1就输出“周一”，如果是2就输出“周二”，其他情况输出“other”</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim testCase.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-keyword">case</span> <span class="hljs-variable">$1</span> <span class="hljs-keyword">in</span><br><span class="hljs-string">&quot;1&quot;</span>)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;周一&quot;</span><br>;;<br><span class="hljs-string">&quot;2&quot;</span>)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;周二&quot;</span><br>;;<br>*)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;其他&quot;</span><br>;;<br><span class="hljs-keyword">esac</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x testCase.sh<br>./testCase.sh 2<br></code></pre></td></tr></table></figure>
+
+<h4 id="for"><a href="#for" class="headerlink" title="for"></a>for</h4><p><strong>案例一</strong>：</p>
+<p>打印命令行输入的参数</p>
+<p>可以看出$*和$@的区别</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim testFor1.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;$*&quot;</span><br><span class="hljs-keyword">do</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;num is <span class="hljs-variable">$1</span>&quot;</span><br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;=================&quot;</span><br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br><span class="hljs-keyword">do</span> <br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;num is <span class="hljs-variable">$j</span>&quot;</span><br><span class="hljs-keyword">done</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x testFor1.sh<br>./testFor1.sh 100 200 300<br></code></pre></td></tr></table></figure>
+
+<p><strong>案例二</strong>：</p>
+<p>从1加到100的输出显示</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim testFor2.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-attribute">SUM</span>=0<br><span class="hljs-keyword">for</span>(( <span class="hljs-attribute">i</span>=1;i&lt;=100;i++))<br><span class="hljs-keyword">do</span><br>	<span class="hljs-attribute">SUM</span>=$[<span class="hljs-variable">$SUM</span>+<span class="hljs-variable">$i</span>]<br>done<br>echo <span class="hljs-string">&quot;总和SUM=<span class="hljs-variable">$SUM</span>&quot;</span><br><br>echo <span class="hljs-string">&quot;=================&quot;</span><br><span class="hljs-attribute">SUM</span>=0<br><span class="hljs-keyword">for</span>(( <span class="hljs-attribute">i</span>=1;i&lt;=$1;i++))<br><span class="hljs-keyword">do</span><br>	<span class="hljs-attribute">SUM</span>=$[<span class="hljs-variable">$SUM</span>+<span class="hljs-variable">$i</span>]<br>done<br>echo <span class="hljs-string">&quot;自定义总和SUM=<span class="hljs-variable">$SUM</span>&quot;</span><br>【退出文件】<br>chmod u+x testFor2.sh<br>./testFor2.sh<br></code></pre></td></tr></table></figure>
+
+<h4 id="while"><a href="#while" class="headerlink" title="while"></a>while</h4><p>案例一：</p>
+<p>从命令行输入一个数n，统计从1+…+n的值是多少</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim testWhile.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-attribute">SUM</span>=0<br><span class="hljs-attribute">i</span>=0<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$i</span> -le <span class="hljs-variable">$1</span> ]<br><span class="hljs-keyword">do</span><br>	<span class="hljs-attribute">SUM</span>=$[<span class="hljs-variable">$SUM</span>+<span class="hljs-variable">$i</span>]<br>	<span class="hljs-attribute">i</span>=$[<span class="hljs-variable">$i</span>+1]<br>done<br>echo <span class="hljs-string">&quot;执行结果=<span class="hljs-variable">$SUM</span>&quot;</span><br>【退出文件】<br>chmod u+x testWhile.sh<br>./testWhile.sh 10<br></code></pre></td></tr></table></figure>
+
+<h4 id="read从控制台输入"><a href="#read从控制台输入" class="headerlink" title="read从控制台输入"></a>read从控制台输入</h4><p>read [选项] 参数</p>
+<p>-p  指定读取值时的提示符</p>
+<p>-t  指定读取值时等待的时间，如果没有在指定的时间输入，就不再等待了</p>
+<p><strong>应用实例</strong></p>
+<p>案例：</p>
+<p>读取控制台输入的num值，在10秒内输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim testRead.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-built_in">read</span> -t 10 -p <span class="hljs-string">&quot;请输入一个数NUM1=&quot;</span> NUM1<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;你输入的NUM1=<span class="hljs-variable">$NUM1</span>&quot;</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x testRead.sh<br>./testRead.sh<br></code></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>shell有系统函数，也可以自定义函数</p>
+<h4 id="系统函数"><a href="#系统函数" class="headerlink" title="系统函数"></a>系统函数</h4><ul>
+<li><p>basename</p>
+<p>功能：返回完整路径最后&#x2F;部分，常用于获取文件名</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs x86asm">basename /home/<span class="hljs-keyword">aaa</span>/<span class="hljs-keyword">test</span><span class="hljs-number">.</span>txt<br>返回<span class="hljs-keyword">test</span><span class="hljs-number">.</span>txt<br>basename /home/<span class="hljs-keyword">aaa</span>/<span class="hljs-keyword">test</span><span class="hljs-number">.</span>txt .txt<br>返回<span class="hljs-keyword">test</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>dirname</p>
+<p>功能：返回完整路径最后&#x2F;前面的部分，常用于返回路径部分</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">dirname <span class="hljs-regexp">/home/</span>aaa/test.txt<br>返回<span class="hljs-regexp">/home/</span>aaa<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h4><p>案例：计算两个参数的和</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim testFun.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">getSum</span></span>() &#123;<br>	SUM=$[<span class="hljs-variable">$n1</span>+<span class="hljs-variable">$n2</span>]<br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;和=<span class="hljs-variable">$SUM</span>&quot;</span><br>&#125;<br><span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;请输入一个数n1=&quot;</span> n1<br><span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;请输入一个数n2=&quot;</span> n2<br>getSum <span class="hljs-variable">$n1</span> <span class="hljs-variable">$n2</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x testFun.sh<br>./testFun.sh 1 3<br></code></pre></td></tr></table></figure>
+
+<h2 id="Shell编程综合案例-数据库备份"><a href="#Shell编程综合案例-数据库备份" class="headerlink" title="Shell编程综合案例 数据库备份"></a>Shell编程综合案例 数据库备份</h2><p><strong>需求分析</strong></p>
+<ol>
+<li>每天凌晨2:30备份数据库hspedu到&#x2F;data&#x2F;backup&#x2F;db</li>
+<li>备份开始和备份结束能够给出相应的提示信息</li>
+<li>备份后的文件要求以备份时间为文件名，并打包成.tar.gz的形式，比如:2021-03-12_230201.tar.gz</li>
+<li>在备份的同时，检查是否有10天前备份的数据库文件，如果有就将其删除。</li>
+</ol>
+<p><strong>代码</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs routeros">pwd （显示工作目录）<br>vim mysql_db_backup.sh<br>【文件中】<br><span class="hljs-comment">#！/bin/bash</span><br><span class="hljs-comment"># 备份目录</span><br><span class="hljs-attribute">BACKUP</span>=/data/backup/db<br><span class="hljs-comment"># 当前时间</span><br><span class="hljs-attribute">DATETIME</span>=$(date +%Y-%m-%d_%H%M%S)<br><span class="hljs-comment"># 数据库的地址</span><br><span class="hljs-attribute">HOST</span>=localhost<br><span class="hljs-comment"># 数据库用户名</span><br><span class="hljs-attribute">DB_USER</span>=root<br><span class="hljs-comment"># 数据库密码</span><br><span class="hljs-attribute">DB_PW</span>=root<br><span class="hljs-comment"># 备份的数据库名</span><br><span class="hljs-attribute">DATABASE</span>=hspedu<br><br><span class="hljs-comment"># 创建备份目录，如果不存在，就创建</span><br>[ ! -d <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;BACKUP&#125;</span>/<span class="hljs-variable">$&#123;DATETIME&#125;</span>&quot;</span> ] &amp;&amp; mkdir -p <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;BACKUP&#125;</span>/<span class="hljs-variable">$&#123;DATETIME&#125;</span>&quot;</span><br><span class="hljs-comment"># 备份数据库</span><br>mysqldump -u<span class="hljs-variable">$&#123;DB_USER&#125;</span> -p<span class="hljs-variable">$&#123;DB_PW&#125;</span> <span class="hljs-attribute">--host</span>=<span class="hljs-variable">$&#123;HOST&#125;</span> -q -R --databases <span class="hljs-variable">$&#123;DATABASE&#125;</span> | gzip &gt; <span class="hljs-variable">$&#123;BACKUP&#125;</span>/<span class="hljs-variable">$&#123;DATETIME&#125;</span>/<span class="hljs-variable">$DATETIME</span>.sql.gz<br><br><span class="hljs-comment"># 将文件处理成tar.gz</span><br>cd <span class="hljs-variable">$&#123;BACKUP&#125;</span><br>tar -zcvf <span class="hljs-variable">$DATETIME</span>.tar.gz <span class="hljs-variable">$&#123;DATETIME&#125;</span><br><span class="hljs-comment"># 删除对应的备份目录</span><br>rm -rf <span class="hljs-variable">$&#123;BACKUP&#125;</span>/<span class="hljs-variable">$&#123;DATETIME&#125;</span><br><br><span class="hljs-comment"># 删除10天前的备份文件</span><br><span class="hljs-built_in">find</span> <span class="hljs-variable">$&#123;BACKUP&#125;</span> -atime +10 -name <span class="hljs-string">&quot;*.tar.gz&quot;</span> -exec rm -rf &#123;&#125; \;<br>echo <span class="hljs-string">&quot;备份数据库<span class="hljs-variable">$&#123;DATABASE&#125;</span> 成功~&quot;</span><br>【退出文件】<br>chmod u+x mysql_db_backup.sh<br>./mysql_db_backup.sh <br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Linux/">Linux</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/02/Linux-3/">
+                        <span class="hidden-mobile">Linux-3</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?https://www.baidu.com/";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
