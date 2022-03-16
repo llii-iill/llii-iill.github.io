@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg">
 <meta property="article:published_time" content="2022-03-02T03:52:37.134Z">
-<meta property="article:modified_time" content="2022-03-01T15:30:20.710Z">
+<meta property="article:modified_time" content="2022-03-15T12:50:03.430Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,8 +273,8 @@
 <blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /root/shcode<br><span class="hljs-built_in">cd</span> /root/shcode/<br><span class="hljs-built_in">ls</span><br>vim hello.sh<br>【文件中】<br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello,world~&quot;</span><br>【退出文件】<br></code></pre></td></tr></table></figure>
 
-<p><img src="D:\typora\AllImages\20220228185028.png" srcset="/img/loading.gif" lazyload alt="image-20220227160802938"></p>
-<p><img src="D:\typora\AllImages\20220228185030.png" srcset="/img/loading.gif" lazyload alt="image-20220226151427317"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204926.png" srcset="/img/loading.gif" lazyload alt="image-20220227160802938"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204930.png" srcset="/img/loading.gif" lazyload alt="image-20220226151427317"></p>
 </blockquote>
 <h2 id="shell的变量"><a href="#shell的变量" class="headerlink" title="shell的变量"></a>shell的变量</h2><p><strong>介绍</strong></p>
 <p>shell变量分为系统变量和用户自定义变量</p>
@@ -290,7 +290,7 @@
 <p><code>vim var.sh</code></p>
 <p>执行脚本</p>
 <p><code>./var.sh</code></p>
-<p><img src="D:\typora\AllImages\20220228185033.png" srcset="/img/loading.gif" lazyload alt="image-20220226151637198"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204938.png" srcset="/img/loading.gif" lazyload alt="image-20220226151637198"></p>
 </blockquote>
 <p><strong>shell变量的定义规则</strong></p>
 <p>变量名称可以由字母、数字和下划线组成，但是不能以数字开头</p>
@@ -313,10 +313,10 @@
 <p>注意：在输出TOMCAT_HOME之前，需要让其生效</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">cd <span class="hljs-regexp">/opt/</span><br>vim <span class="hljs-regexp">/etc/</span>profile<br></code></pre></td></tr></table></figure>
 
-<p><img src="D:\typora\AllImages\20220228185039.png" srcset="/img/loading.gif" lazyload alt="image-20220226212829099"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204946.png" srcset="/img/loading.gif" lazyload alt="image-20220226212829099"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$TOMCAT_HOME</span><br><span class="hljs-built_in">source</span> /etc/profile<br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$TOMCAT_HOME</span><br></code></pre></td></tr></table></figure>
 
-<p><img src="D:\typora\AllImages\20220228185043.png" srcset="/img/loading.gif" lazyload alt="image-20220226212908467"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204950.png" srcset="/img/loading.gif" lazyload alt="image-20220226212908467"></p>
 </blockquote>
 <p><strong>shell的多行注释</strong>：</p>
 <figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">:&lt;&lt;!<br>……<br>!<br></code></pre></td></tr></table></figure>
@@ -327,7 +327,7 @@
 <p>当我们执行shell脚本时，如果希望获取到命令行的参数信息，就要使用位置参数变量</p>
 <p>例如：<code>./myshell.sh 100 200</code>， 就是一个执行shell的命令行，可以在myshell脚本中获取到参数信息</p>
 <p><strong>基本语法</strong></p>
-<p><img src="D:\typora\AllImages\20220228185047.png" srcset="/img/loading.gif" lazyload alt="image-20220227162629961"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315204954.png" srcset="/img/loading.gif" lazyload alt="image-20220227162629961"></p>
 <p><strong>位置参数变量</strong></p>
 <p>编写一个shell脚本position.sh，在脚本中获取到命令行的各个参数信息</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim position.sh<br>【文件中】<br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;0=<span class="hljs-variable">$0</span> 1=<span class="hljs-variable">$1</span> 2=<span class="hljs-variable">$2</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;所有的参数=$*&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;参数的个数=<span class="hljs-variable">$#</span>&quot;</span><br>【退出文件】<br><span class="hljs-built_in">chmod</span> u+x position.sh<br>./position.sh 100 200<br></code></pre></td></tr></table></figure>
@@ -438,7 +438,7 @@
 <blockquote>
 <p><code>vim ifdemo.sh</code></p>
 <p>【文件中】</p>
-<p><img src="D:\typora\AllImages\20220228185053.png" srcset="/img/loading.gif" lazyload alt="image-20220226214023550"></p>
+<p><img src="https://gitee.com/li-il/pic_bed/raw/master/img/20220315205000.png" srcset="/img/loading.gif" lazyload alt="image-20220226214023550"></p>
 <p>【退出文件】</p>
 <p><code>chmod u+x ifdemo.sh</code></p>
 <p><code>./ifdemo.sh</code></p>
@@ -528,6 +528,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/03/16/test/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
