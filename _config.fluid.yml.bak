@@ -201,6 +201,10 @@ font:
 # 指定自定义 .js 文件路径，支持列表；路径是相对 source 目录，如 /js/custom.js 对应存放目录 source/js/custom.js
 # Specify the path of your custom js file, support list. The path is relative to the source directory, such as `/js/custom.js` corresponding to the directory `source/js/custom.js`
 custom_js:
+  - /js/FunnyTitle.js
+  - //cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxuehua.js # 小雪花飘落
+  # - //cdn.jsdelivr.net/gh/bynotes/texiao/source/js/xiaoxingxing.js # 鼠标跟随小星星
+
 
 # 指定自定义 .css 文件路径，用法和 custom_js 相同
 # The usage is the same as custom_js
@@ -212,7 +216,12 @@ custom_head: ''
 
 # 自定义底部 HTML 内容（位于 footer 上方），注意不要和 `post: custom` 配置冲突
 # Customize the HTML content at the bottom (located above the footer), be careful not to conflict with `post: custom`
-custom_html: ''
+custom_html: '
+'
+# <link rel="stylesheet" href="/dist/APlayer.min.css">
+# <div id="aplayer"></div>
+# <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+# <script type="text/javascript" src="/dist/music.js"></script>
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # 网页访问统计
 # Analysis of website visitors
@@ -347,7 +356,7 @@ search:
 
   # 搜索索引文件的路径，可以是相对路径或外站的绝对路径
   # Path for search index file, it can be a relative path or an absolute path
-  path: /local-searc h.xml
+  path: /local-search.xml
 
   # 文件生成在本地的位置，必须是相对路径
   # The location where the index file is generated locally, it must be a relative location
@@ -415,7 +424,13 @@ footer:
     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
     <i class="iconfont icon-love"></i>
     <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    <div style="font-size: 0.85rem">
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script src="/js/duration.js"></script>
+    </div>
   '
+  
   # <script language = "JavaScript"type = "text/javascript" >
   #   //添加网站的上线时间
   #   var urodz = new Date("11/18/2016");
@@ -462,8 +477,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(2).jpg
-
+  banner_img: https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220426231820.jpeg
   # 头图高度，屏幕百分比
   # Height ratio of banner image
   # Available: 0 - 100
@@ -525,7 +539,7 @@ index:
   # 文章通过 sticky 排序后，在首页文章标题前显示图标
   # If the posts are sorted by `sticky`, an icon is displayed in front of the post title
   post_sticky:
-    enable: true
+    enable: false
     # icon: "iconfont icon-top"
 
 
@@ -616,7 +630,7 @@ post:
   # 版权声明，会显示在每篇文章的结尾
   # Copyright, will be displayed at the end of each post
   copyright:
-    enable: true
+    enable: false
     content: '本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！'
 
   # 文章底部上一篇下一篇功能
