@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: 秉烛夜游
+subtitle: '不想睡'
 description: ''
 keywords:
-author: John Doe
+author: LXR
 language: zh-CN
 timezone: ''
 
@@ -102,4 +102,7 @@ theme: fluid
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/llii-iill/llii-iill.github.io
+  branch: master # Ĭ��ʹ�� master ��֧
+  message: Update Hexo Static Content # ������Զ���˴β�����µ�˵��

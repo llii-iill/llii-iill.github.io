@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
+title: ç§‰çƒ›å¤œæ¸¸
+subtitle: 'ä¸æƒ³ç¡'
 description: ''
 keywords:
-author: John Doe
+author: LXR
 language: zh-CN
 timezone: ''
 
@@ -101,8 +101,17 @@ theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
+# deploy:
+  #type: git
+  #repo: https://github.com/llii-iill/llii-iill.github.io
+  #branch: 
+  #message: Update Hexo Static Content
 deploy:
   type: git
-  repo: https://github.com/llii-iill/llii-iill.github.io
-  branch: master # Ä¬ÈÏÊ¹ÓÃ master ·ÖÖ§
-  message: Update Hexo Static Content # Äã¿ÉÒÔ×Ô¶¨Òå´Ë´Î²¿Êğ¸üĞÂµÄËµÃ÷
+  repo:
+        # æäº¤åˆ°GitHub
+        github: https://github.com/llii-iill/llii-iill.github.io,master
+        # æäº¤åˆ°æœåŠ¡å™¨
+        hexo: root@49.232.16.126:/home/gitlxr/blog.git,master
+  # branch: master # é»˜è®¤ä½¿ç”¨ master åˆ†æ”¯
+  message: Update Hexo Static Content # ä½ å¯ä»¥è‡ªå®šä¹‰æ­¤æ¬¡éƒ¨ç½²æ›´æ–°çš„è¯´æ˜
