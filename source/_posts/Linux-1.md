@@ -5,7 +5,8 @@ index_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100
 categories:
 - [Linux]
 sticky: 1.0
-excerpt: Linux入门的第一课，包含【Linux的安装与配置】、【VI和VIM】、【用户管理】等内容。
+excerpt: 帝企鹅大军：人类都是铲屎官，嗷呜~
+Linux入门的第一课，包含【Linux的安装与配置】、【VI和VIM】、【用户管理】等内容。
 ---
 
 # 简介和环境配置

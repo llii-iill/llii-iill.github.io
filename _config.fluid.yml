@@ -843,7 +843,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100031.jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427103652.jpg"
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: "文章归档"
@@ -886,7 +886,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427101838.jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427101946.jpg"
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle: "所有标签"
