@@ -1,7 +1,7 @@
 ---
 title: vue-5
 tags: [vue]
-index_img: "https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg"
+index_img: "https://tse1-mm.cn.bing.net/th/id/OIP-C.0MIISgK80GylzM9OkrtiyAAAAA?pid=ImgDet&rs=1"
 categories:
 - [vue]
 sticky: 2.4

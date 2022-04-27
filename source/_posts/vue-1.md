@@ -1,11 +1,11 @@
 ---
 title: vue-1
 tags: [vue]
-index_img: "https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg"
+index_img: "https://tse1-mm.cn.bing.net/th/id/OIP-C.0MIISgK80GylzM9OkrtiyAAAAA?pid=ImgDet&rs=1"
 categories:
 - [vue]
 sticky: 2.0
-excerpt: Vue2.0入门的第一课，包含【模板语法】、【数据绑定】、【数据代理】、【事件处理】、【计算属性】、【监视属性】、【渲染】、【内置指令】、【生命周期】等内容。
+excerpt: Vue是一道光，绿到你发慌⭐。Vue2.0入门的第一课，包含【模板语法】、【数据绑定】、【数据代理】、【事件处理】、【计算属性】、【监视属性】、【渲染】、【内置指令】、【生命周期】等内容。
 ---
 
 说明：本文是基于全网最细尚硅谷天禹老师的vue2.0和vue3.0教程，具体资料可以点击下面的链接。
