@@ -18,11 +18,11 @@
 
 # 用于浏览器标签的图标
 # Icon for browser tab
-favicon: "https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png"
+favicon: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100859.png"
 
 # 用于苹果设备的图标
 # Icon for Apple touch
-apple_touch_icon: "https://gitee.com/li-il/pic_bed/raw/master/img/%E5%B1%B1_1.png"
+apple_touch_icon: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100859.png"
 
 # 浏览器标签页中的标题分隔符，效果： 文章名 - 站点名
 # Title separator in browser tab, eg: article - site
@@ -549,7 +549,7 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100031.jpg"
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -643,7 +643,7 @@ post:
   # Custom content at the bottom of the post page (located above the footer)
   custom:
     enable: false
-    content: '<img src="https://gitee.com/li-il/pic_bed/raw/master/img/%E6%99%AF%E8%A7%82%E9%9B%86.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">'
+    content: '<img src="https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427101032.png" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">'
 
   # 文章图片可点击放大
   # Zoom feature of images
@@ -843,7 +843,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100031.jpg"
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: "文章归档"
@@ -855,7 +855,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427101838.jpg"
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: '文章分类'
@@ -886,7 +886,7 @@ category:
 #---------------------------
 tag:
   enable: true
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper%20(1).jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427101838.jpg"
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle: "所有标签"
@@ -904,7 +904,7 @@ tag:
 #---------------------------
 about:
   enable: true
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/wallpaper.jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100031.jpg"
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: "所见即我"
@@ -956,7 +956,7 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: "https://gitee.com/li-il/pic_bed/raw/master/img/todaybing-hd-gWz8FSFP-20211108.jpg"
+  banner_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427102017.jpg"
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle: "我和我的小霍伴们"

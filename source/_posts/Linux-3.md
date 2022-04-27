@@ -1,7 +1,7 @@
 ---
 title: Linux-3
 tags: [Linux]
-index_img: "https://gitee.com/li-il/pic_bed/raw/master/img/20220301230133.jpeg"
+index_img: "https://cdn.jsdelivr.net/gh/llii-iill/cd_images@main/img/20220427100447.png"
 categories:
 - [Linux]
 sticky: 1.3
